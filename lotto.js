@@ -13,9 +13,14 @@ let moneyTotal = 0;
 
 let auto = false;
 
-showMoneyBool = true;
-showTimeBool = true;
-timeBetween = 10;
+let showMoneyBool = true;
+let showTimeBool = true;
+let timeBetween = 10;
+let lottoPrice = 1;
+let winFour = 10;
+let winFive = 50;
+let winSix = 2500;
+let winSeven = 1000000;
 
 chooseNum = (i, button) => {
     if(chosenNumbers.length < 6){
@@ -45,9 +50,9 @@ chooseNum = (i, button) => {
 
 rightNumbers = () => {
     if(chosenNumbers.length == 7){
-        money--;
-        moneySpent++;
-        moneyTotal = moneyWon - moneySpent;
+        money = ((money*1) - (lottoPrice*1));
+        moneySpent = ((moneySpent*1) + (lottoPrice*1));
+        moneyTotal = ((moneyWon*1) - (moneySpent*1));
         if(moneyTotal > 0){
             document.getElementById("totalMoney").innerHTML = "Rahaa yhteensä: +" + moneyTotal + "€";
         }
@@ -102,10 +107,10 @@ compareNumbers = () => {
     }
 
     if(intersection.length == 4){
-        money += 10;
-        moneyWon += 10;
+        money = ((money*1) + (winFour*1));
+        moneyWon = ((moneyWon*1) + (winFour*1));
         document.getElementById("wonMoney").innerHTML = "Rahaa voitettu: " + moneyWon + "€";
-        moneyTotal = moneyWon - moneySpent;
+        moneyTotal = ((moneyWon*1) - (moneySpent*1));
         if(moneyTotal > 0){
             document.getElementById("totalMoney").innerHTML = "Rahaa yhteensä: +" + moneyTotal + "€";
         }
@@ -114,10 +119,10 @@ compareNumbers = () => {
         }
     }
     if(intersection.length == 5){
-        money += 55;
-        moneyWon += 55;
+        money = ((money*1) + (winFive*1));
+        moneyWon = ((moneyWon*1) + (winFive*1));
         document.getElementById("wonMoney").innerHTML = "Rahaa voitettu: " + moneyWon + "€";
-        moneyTotal = moneyWon - moneySpent;
+        moneyTotal = ((moneyWon*1) - (moneySpent*1));
         if(moneyTotal > 0){
             document.getElementById("totalMoney").innerHTML = "Rahaa yhteensä: +" + moneyTotal + "€";
         }
@@ -126,10 +131,10 @@ compareNumbers = () => {
         }
     }
     if(intersection.length == 6){
-        money += 2500;
-        moneyWon += 2500;
+        money = ((money*1) + (winSix*1));
+        moneyWon = ((moneyWon*1) + (winSix*1));
         document.getElementById("wonMoney").innerHTML = "Rahaa voitettu: " + moneyWon + "€";
-        moneyTotal = moneyWon - moneySpent;
+        moneyTotal = ((moneyWon*1) - (moneySpent*1));
         if(moneyTotal > 0){
             document.getElementById("totalMoney").innerHTML = "Rahaa yhteensä: +" + moneyTotal + "€";
         }
@@ -138,10 +143,12 @@ compareNumbers = () => {
         }
     }
     if(intersection.length == 7){
-        money += 1000000;
-        moneyWon += 1000000;
+        money = ((money*1) + (winSeven*1));
+        moneyWon = ((moneyWon*1) + (winSeven*1));
         document.getElementById("wonMoney").innerHTML = "Rahaa voitettu: " + moneyWon + "€";
-        moneyTotal = moneyWon - moneySpent;
+        moneyTotal = ((moneyWon*1) - (moneySpent*1));
+        allRight = true;
+        auto = false;
         if(moneyTotal > 0){
             document.getElementById("totalMoney").innerHTML = "Rahaa yhteensä: +" + moneyTotal + "€";
         }
@@ -153,6 +160,7 @@ compareNumbers = () => {
 
 checkForAuto = () => {
     if(!auto){
+        allRight = false;
         auto = true
         untilRight();
     }
@@ -228,4 +236,24 @@ showTime = () => {
 
 changeTimeBetween = () => {
     timeBetween = document.getElementById("timeBetween").value * 1000;
+}
+
+changeLottoPrice = () => {
+    lottoPrice = document.getElementById("lottoPrice").value;
+}
+
+changeWinFour = () => {
+    winFour = document.getElementById("winFour").value;
+}
+
+changeWinFive = () => {
+    winFive = document.getElementById("winFive").value;
+}
+
+changeWinSix = () => {
+    winSix = document.getElementById("winSix").value;
+}
+
+changeWinSeven = () => {
+    winSeven = document.getElementById("winSeven").value;
 }
